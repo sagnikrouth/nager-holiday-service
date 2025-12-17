@@ -51,6 +51,14 @@ holiday:
       IL: [FRIDAY, SATURDAY]
       BD: [FRIDAY, SATURDAY]
       SA: [FRIDAY, SATURDAY]
+      QA: [FRIDAY, SATURDAY]
+      KW: [FRIDAY, SATURDAY]
+      OM: [FRIDAY, SATURDAY]
+      BH: [FRIDAY, SATURDAY]
+      EG: [FRIDAY, SATURDAY]
+      JO: [FRIDAY, SATURDAY]
+
+
 # WebClient base URL for Nager.Date API; override this in tests to point to WireMock
 nager:
   base-url: https://date.nager.at/api/v3

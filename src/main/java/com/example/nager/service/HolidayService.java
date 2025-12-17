@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux; import reactor.core.publisher.Mono;
 import java.time.DayOfWeek; import java.time.LocalDate; import java.util.*; import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class HolidayService {
     private static final Logger log = LoggerFactory.getLogger(HolidayService.class);
