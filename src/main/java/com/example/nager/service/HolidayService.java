@@ -33,6 +33,7 @@ public class HolidayService {
             .doOnNext(list -> log.info("Last-3 computed for {} -> {} entries", countryCode, list.size()));
     }
 
+    @Cacheable(cacheNames = "weekdayCounts", key = "#year + ':' + #countryCodes")
     public Mono<List<CountryHolidayCount>> countWeekdayHolidays(int year, List<String> countryCodes) {
         List<Mono<CountryHolidayCount>> monos = new ArrayList<>();
         for (String cc : countryCodes) {
@@ -48,6 +49,7 @@ public class HolidayService {
             .doOnNext(list -> log.info("Weekday counts computed for {} countries", list.size()));
     }
 
+    @Cacheable(cacheNames = "commonDates", key = "T(String).format('%d:%s:%s', #year, #countryA, #countryB)")
     public Mono<List<CommonHoliday>> commonDates(int year, String countryA, String countryB) {
         Mono<List<PublicHoliday>> a = client.getPublicHolidays(year, countryA);
         Mono<List<PublicHoliday>> b = client.getPublicHolidays(year, countryB);

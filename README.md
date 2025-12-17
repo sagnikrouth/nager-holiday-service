@@ -31,7 +31,7 @@ mvn -q -DskipTests package
 java -jar target/nager-holiday-service-1.0.0.jar
 ```
 
-Swagger UI: `http://localhost:8080/swagger-ui/index.html`
+Swagger UI: `http://localhost:8080/swagger-ui.html`
 OpenAPI JSON: `http://localhost:8080/v3/api-docs`
 OpenAPI YAML: `http://localhost:8080/v3/api-docs.yaml`
 Health: `http://localhost:8080/actuator/health`
