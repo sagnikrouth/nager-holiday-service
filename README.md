@@ -17,7 +17,7 @@ Github links: https://github.com/sagnikrouth/nager-holiday-service.git
 - `GET /api/holidays/common-dates?year=2024&countryA=US&countryB=GB`
 
 ## Highlights
-- **Reactive WebClient** only (no RestTemplate) with **timeouts** & **light retry** configured via `application.yml`
+- **Reactive WebClient** only with **timeouts** & **light retry** configured via `application.yml`
 - **Resilience4j RateLimiter** (reactive operator) configured via `application.yml`
 - **Caffeine cache** (async) — cache names/spec in `application.yml`
 - **Weekend rules**: country overrides in `application.yml`, default Saturday/Sunday

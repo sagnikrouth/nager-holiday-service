@@ -1,4 +1,5 @@
 package com.example.nager.service;
+
 import com.example.nager.client.NagerDateReactiveClient;
 import com.example.nager.config.WeekendProperties;
 import com.example.nager.model.CommonHoliday;
@@ -17,7 +18,7 @@ public class HolidayService {
     private final NagerDateReactiveClient client; private final WeekendProperties weekendProps;
     public HolidayService(NagerDateReactiveClient client, WeekendProperties weekendProps) { this.client = client; this.weekendProps = weekendProps; }
 
-    @Cacheable(cacheNames = "lastThree", key = "#today + ':' + #countryCode")
+    @Cacheable(cacheNames = "lastThree", key = "#p0 + ':' + #p1")
     public Mono<List<HolidaySummary>> getLastThreeHolidays(String countryCode, LocalDate today) {
         int year = today.getYear();
         Mono<List<PublicHoliday>> current = client.getPublicHolidays(year, countryCode);
@@ -31,7 +32,7 @@ public class HolidayService {
             .doOnNext(list -> log.info("Last-3 computed for {} -> {} entries", countryCode, list.size()));
     }
 
-    @Cacheable(cacheNames = "weekdayCounts", key = "#year + ':' + #countryCodes")
+    @Cacheable(cacheNames = "weekdayCounts", key = "#p0 + ':' + #p1")
     public Mono<List<CountryHolidayCount>> countWeekdayHolidays(int year, List<String> countryCodes) {
         List<Mono<CountryHolidayCount>> monos = new ArrayList<>();
         for (String cc : countryCodes) {
@@ -47,7 +48,7 @@ public class HolidayService {
             .doOnNext(list -> log.info("Weekday counts computed for {} countries", list.size()));
     }
 
-    @Cacheable(cacheNames = "commonDates", key = "T(String).format('%d:%s:%s', #year, #countryA, #countryB)")
+    @Cacheable(cacheNames = "commonDates", key = "T(String).format('%d:%s:%s', #p0, #p1, #p2)")
     public Mono<List<CommonHoliday>> commonDates(int year, String countryA, String countryB) {
         Mono<List<PublicHoliday>> a = client.getPublicHolidays(year, countryA);
         Mono<List<PublicHoliday>> b = client.getPublicHolidays(year, countryB);
