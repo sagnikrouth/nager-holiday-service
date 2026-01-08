@@ -42,11 +42,11 @@ class WireMockIT {
     @Test
     void lastThree_usesWireMock() throws Exception {
         // Stubs for current & previous year - note paths are relative to base-url (/api/v3)
-        wm.stubFor(get(urlEqualTo("/PublicHolidays/2025/GB"))
-                .willReturn(okJson("[{\"date\":\"2025-01-01\",\"name\":\"New Year's Day\",\"localName\":\"New Year's Day\"}]")));
+        wm.stubFor(get(urlEqualTo("/PublicHolidays/2026/GB"))
+                .willReturn(okJson("[{\"date\":\"2026-01-01\",\"name\":\"New Year's Day\",\"localName\":\"New Year's Day\"}]")));
 
-        wm.stubFor(get(urlEqualTo("/PublicHolidays/2024/GB"))
-                .willReturn(okJson("[{\"date\":\"2024-12-25\",\"name\":\"Christmas Day\",\"localName\":\"Christmas Day\"}]")));
+        wm.stubFor(get(urlEqualTo("/PublicHolidays/2025/GB"))
+                .willReturn(okJson("[{\"date\":\"2025-12-25\",\"name\":\"Christmas Day\",\"localName\":\"Christmas Day\"}]")));
 
         webClient.get()
                 .uri("/api/holidays/last-3/GB")
